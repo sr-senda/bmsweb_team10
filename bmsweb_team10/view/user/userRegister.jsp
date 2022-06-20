@@ -11,7 +11,7 @@
 	<div id="wrap">
 
 		<!-- ヘッダー部分 -->
-		<%@ include file="/common/header.jsp"%>
+		<!-- <%@ include file="/common/header.jsp"%>-->
 
 		<!-- メニュー部分 -->
 		<div id="menu">
@@ -19,7 +19,7 @@
 				<!-- ナビゲーション  -->
 				<div id="nav">
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/view/userMenu.jsp">[メニュー]</a></li>
+						<li></li>
 					</ul>
 				</div>
 
@@ -34,15 +34,19 @@
 		<div id="main" class="container">
 
 			<!--  入力フォーム -->
-			<form action="<%=request.getContextPath()%>/insert">
-				<table class="input-table" align="center">
+			<form action="<%=request.getContextPath()%>/view/user/menu.jsp">
+				<table class="input-table">
 					<tr>
-						<th>メールアドレス</th>
-						<td><input type="text" name="email"></td>
+						<th>会員ID</th>
+						<td><input type="text" name="id"></td>
 					</tr>
 					<tr>
 						<th>氏名</th>
 						<td><input type="text" name="name"></td>
+					</tr>
+					<tr>
+						<th>mail</th>
+						<td><input type="text" name="email"></td>
 					</tr>
 					<tr>
 						<th>住所</th>
@@ -62,7 +66,7 @@
 		</div>
 
 		<!-- フッター部分 -->
-		<%@ include file="/common/footer.jsp"%>
+		<!-- <%@ include file="/common/footer.jsp"%> -->
 
 	</div>
 </body>
