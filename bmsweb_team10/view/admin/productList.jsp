@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>注文内容一覧</title>
+<title>商品一覧</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
 </head>
@@ -23,7 +23,7 @@
 				</div>
 				<!-- ページタイトル -->
 				<div id="page_title">
-					<h2>注文内容一覧</h2>
+					<h2>商品一覧</h2>
 				</div>
 			</div>
 		</div>
@@ -36,39 +36,36 @@
 				<thead>
 					<tr>
 						<th>受注No</th>
-						<th>氏名</th>
-						<th>注文日</th>
-						<th>内容詳細</th>
-						<th>入金・発送</th>
+						<th>商品名</th>
+						<th>価格</th>
+						<th>在庫数</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>田中</td>
-						<td>22/06/01</td>
+						<td>ユニフォームA</td>
+						<td>\300</td>
+						<td>5</td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
+							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td>山田</td>
-						<td>22/06/01</td>
+						<td>ユニフォームB</td>
+						<td>\600</td>
+						<td>3</td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
+							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td>田中</td>
-						<td>22/06/02</td>
+						<td>ユニフォームC</td>
+						<td>\900</td>
+						<td>7</td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
+							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
 					</tr>
 				</tbody>
 			</table>
