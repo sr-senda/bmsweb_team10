@@ -46,7 +46,7 @@
 				<li><a href="<%=request.getContextPath()%>/view/user/userUpdate.jsp">【会員情報変更】</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/view/user/order.jsp">【注文する】</a></li>
-				<li><a href="<%=request.getContextPath()%>/view/user/login.jsp">【ログアウト】</a></li>
+				<li><a href="<%=request.getContextPath()%>/logout" class="mb50">【ログアウト】</a></li>
 			</ul>
 		</div>
 
