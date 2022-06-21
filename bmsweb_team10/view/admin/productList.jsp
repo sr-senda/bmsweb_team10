@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList,bean.Product" %>
 
 <html>
 <head>
@@ -35,7 +36,7 @@
 			<table class="list-table">
 				<thead>
 					<tr>
-						<th>受注No</th>
+						<th>商品No</th>
 						<th>商品名</th>
 						<th>価格</th>
 						<th>在庫数</th>
@@ -43,31 +44,23 @@
 					</tr>
 				</thead>
 				<tbody>
+			<%
+			ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("product_list");
+			if(list != null){
+				for(int i=0;i<list.size();i++){
+					Product product = (Product)list.get(i);
+			%>
 					<tr>
-						<td>1</td>
-						<td>ユニフォームA</td>
-						<td>\300</td>
-						<td>5</td>
+						<td><%=product.getProductid()%></td>
+						<td><%=product.getProductname()%></td>
+						<td><%=product.getPrice()%></td>
+						<td><%=product.getStock()%></td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>ユニフォームB</td>
-						<td>\600</td>
-						<td>3</td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>ユニフォームC</td>
-						<td>\900</td>
-						<td>7</td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/productUpdate.jsp">更新</a></td>
+							href="<%=request.getContextPath()%>/stockupdate">更新</a></td>
 					</tr>
 				</tbody>
+				<% }
+			}%>
 			</table>
 		</div>
 

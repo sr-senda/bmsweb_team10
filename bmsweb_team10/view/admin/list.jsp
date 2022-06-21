@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.ArrayList,bean.Order" %>
 
 <html>
 <head>
@@ -42,34 +43,25 @@
 						<th>入金・発送</th>
 					</tr>
 				</thead>
+			<%
+			ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("order_list");
+			if(list != null){
+				for(int i=0;i<list.size();i++){
+					Order order = (Order)list.get(i);
+			%>
 				<tbody>
 					<tr>
-						<td>1</td>
-						<td>田中</td>
-						<td>22/06/01</td>
+						<td><%=order.getOrderid()%></td>
+						<td><%=order.getName()%></td>
+						<td><%=order.getOrderday()%></td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
+							href="<%=request.getContextPath()%>/detail">詳細</a></td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>山田</td>
-						<td>22/06/01</td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>田中</td>
-						<td>22/06/02</td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/detail.jsp">詳細</a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
-					</tr>
+							href="<%=request.getContextPath()%>/statusupdate">更新</a></td>
+				<%
+				}
+			}
+				%>
 				</tbody>
 			</table>
 		</div>

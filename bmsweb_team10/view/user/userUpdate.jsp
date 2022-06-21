@@ -1,5 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<%@page import="java.util.ArrayList,bean.User"%>
+<%
+	//getAttributeメソッドからセッションスコープに登録したuserInfoを取得
+	User userInfo =(User)session.getAttribute("userInfo");
+	//String error = (String) request.getAttribute("error");
+%>
 <html>
 <head>
 <title>会員情報変更</title>
@@ -23,7 +28,7 @@
 		<div id="main" class="container">
 
 			<!--  入力フォーム -->
-			<form action="<%=request.getContextPath()%>/view/user/menu.jsp">
+			<form action="<%=request.getContextPath()%>/userupdate" method="post">
 				<!-- 変更画面 -->
 				<table class="input-table">
 					<thead>
@@ -36,23 +41,23 @@
 					<tbody>
 						<tr>
 							<th>会員ID</th>
-							<td>＊＊＊＊</td>
-							<td>＊＊＊＊</td>
+							<td><%=userInfo.getUserid() %></td>
+							<td><%=userInfo.getUserid() %></td>
 						</tr>
 						<tr>
 							<th>氏名</th>
-							<td>＊＊＊＊</td>
-							<td><input type="text" name=""></td>
+							<td><%=userInfo.getName() %></td>
+							<td><input type="text" name="name"></td>
 						</tr>
 						<tr>
 							<th>mail</th>
-							<td>＊＊＊＊</td>
-							<td><input type="text" name=""></td>
+							<td><%=userInfo.getMail() %></td>
+							<td><input type="text" name="email"></td>
 						</tr>
 						<tr>
 							<th>住所</th>
-							<td>＊＊＊＊</td>
-							<td><input type="text" name=""></td>
+							<td><%=userInfo.getAddress() %></td>
+							<td><input type="text" name="address"></td>
 						</tr>
 					</tbody>
 				</table>

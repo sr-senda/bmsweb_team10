@@ -1,5 +1,4 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
 <html>
 <head>
 <title>会員登録</title>
@@ -34,7 +33,7 @@
 		<div id="main" class="container">
 
 			<!--  入力フォーム -->
-			<form action="<%=request.getContextPath()%>/view/user/menu.jsp">
+			<form action="<%=request.getContextPath()%>/register" method="post">
 				<table class="input-table">
 					<tr>
 						<th>会員ID</th>
@@ -54,7 +53,7 @@
 					</tr>
 					<tr>
 						<th>パスワード</th>
-						<td><input type="text" name="password"></td>
+						<td><input type="password" name="password"></td>
 					</tr>
 				</table>
 

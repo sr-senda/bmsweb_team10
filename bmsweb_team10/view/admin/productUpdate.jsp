@@ -1,3 +1,8 @@
+<!--
+作成日：2022/06/21
+作成者：田中梨貴
+内容：在庫数更新（jsp）
+ -->
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <html>
@@ -26,10 +31,10 @@
 			</div>
 		</div>
 
-		<!-- 書籍変更コンテンツ部分 -->
 		<div id="main" class="container">
 
 			<!-- 変更画面 -->
+			<form action="<%=request.getContextPath() %>/stockupdate" method="get">
 				<table class="input-table">
 					<thead>
 						<tr>
@@ -57,13 +62,13 @@
 						<tr>
 							<th>在庫数</th>
 							<td>5</td>
-							<td><input type="text" name=""></td>
+							<td><input type="text" name="stock"></td>
 						</tr>
 					</tbody>
 				</table>
 
 				<input type="submit" value="更新">
-
+			</form>
 		</div>
 
 	</div>

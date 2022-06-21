@@ -1,10 +1,11 @@
 package dao;
 
 import java.sql.*;
-import bean.Admin;
+import java.util.ArrayList;
+
 import bean.Order;
 
-public class AdminDAO {
+public class OrderDAO {
 
 	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
 	private static String URL = "jdbc:mysql://localhost/uniformdb";
@@ -23,23 +24,29 @@ public class AdminDAO {
 
 	}
 
-	public Admin selectByAdminer(String adminid, String password) {
+	// 注文一覧を検索する
+	public ArrayList<Order> selectAll() {
+
+		ArrayList<Order> order_list = new ArrayList<Order>();
+		String sql = "SELECT * FROM orderinfo ORDER BY orderid";
 
 		Connection con = null;
 		Statement smt = null;
-		Admin admin = new Admin();
-
-		String sql = "SELECT * FROM admininfo WHERE adminid ='" + adminid + "' AND password='" + password + "'";
 
 		try {
-
 			con = getConnection();
 			smt = con.createStatement();
+
 			ResultSet rs = smt.executeQuery(sql);
 
-			if (rs.next()) {
-				admin.setUserid(rs.getString("adminid"));
-				admin.setPassword(rs.getString("password"));
+			// 注文一覧をorderオブジェクトに格納し、order_listtに入れる
+			while (rs.next()) {
+				Order order = new Order();
+				order.setOrderid(rs.getString("orderid"));
+				order.setName(rs.getString("name"));
+				order.setOrderday(rs.getString("orderday"));
+
+				order_list.add(order);
 			}
 
 		} catch (Exception e) {
@@ -58,28 +65,28 @@ public class AdminDAO {
 				}
 			}
 		}
-		return admin;
+		// 取得した注文の全データを戻り値にする
+		return order_list;
+
 	}
 
-	public void update(Order orderinfo) {
+	// データベースに注文内容を登録するインスタンスメソッドorderInsertを定義
+	public void orderInsert(Order order) {
 
 		Connection con = null;
 		Statement smt = null;
-		System.out.println(orderinfo.getPayment());
 
 		try {
-
-			// 引数の情報を利用し、更新用のSQL文を文字列として定義
-			String sql = "UPDATE orderinfo SET payment='" + orderinfo.getPayment() + "',delivery='"
-					+ orderinfo.getDelivery() + "' WHERE orderid='" + orderinfo.getOrderid() + "'";
-
-			// BookDAOクラスに定義したgetConnection()メソッドを利用して、Connectionオブジェクトを生成
+			// DB接続
 			con = getConnection();
-
-			// ConnectionオブジェクトのcreateStatement（）メソッドを利用して、Statementオブジェクトを生成
 			smt = con.createStatement();
 
-			// StatementオブジェクトのexecuteUpdate（）メソッドを利用して、SQL文を発行し書籍データを変更
+			// SQL文
+			String sql = "INSERT INTO orderinfo(userid, name, productid, quantity, address, mail)VALUES('"
+					+ order.getUserid() + "' '" + order.getName() + "' '" + order.getAddress() + " ' '"
+					+ order.getMail() + "' '" + order.getProductid() + "' '" + order.getQuantity() + ")";
+
+			// SQL発行
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {

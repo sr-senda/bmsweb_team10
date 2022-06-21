@@ -1,16 +1,17 @@
 package dao;
 
 import java.sql.*;
-import bean.Admin;
-import bean.Order;
+import java.util.ArrayList;
+import bean.Product;
 
-public class AdminDAO {
+public class ProductDAO {
 
 	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
 	private static String URL = "jdbc:mysql://localhost/uniformdb";
 	private static String USER = "root";
 	private static String PASSWD = "root123";
 
+	// データベース接続
 	public Connection getConnection() {
 
 		try {
@@ -23,23 +24,29 @@ public class AdminDAO {
 
 	}
 
-	public Admin selectByAdminer(String adminid, String password) {
+	// 商品一覧を検索する
+	public ArrayList<Product> selectAll() {
+
+		ArrayList<Product> product_list = new ArrayList<Product>();
+		String sql = "SELECT * FROM productinfo ORDER BY productid";
 
 		Connection con = null;
 		Statement smt = null;
-		Admin admin = new Admin();
-
-		String sql = "SELECT * FROM admininfo WHERE adminid ='" + adminid + "' AND password='" + password + "'";
-
 		try {
-
 			con = getConnection();
 			smt = con.createStatement();
+
 			ResultSet rs = smt.executeQuery(sql);
 
-			if (rs.next()) {
-				admin.setUserid(rs.getString("adminid"));
-				admin.setPassword(rs.getString("password"));
+			// 商品一覧をproductオブジェクトに格納し、product_listに入れる
+			while (rs.next()) {
+				Product product = new Product();
+				product.setProductid(rs.getString("productid"));
+				product.setProductname(rs.getString("productname"));
+				product.setPrice(rs.getInt("price"));
+				product.setStock(rs.getInt("stock"));
+
+				product_list.add(product);
 			}
 
 		} catch (Exception e) {
@@ -58,29 +65,30 @@ public class AdminDAO {
 				}
 			}
 		}
-		return admin;
+		// 取得した商品の全データを戻り値にする
+		return product_list;
+
 	}
 
-	public void update(Order orderinfo) {
-
+	// データベースの在庫数を更新するインスタンスメソッドupdateを定義
+	public void update(Product product) {
 		Connection con = null;
 		Statement smt = null;
-		System.out.println(orderinfo.getPayment());
 
+		System.out.println(product.getProductid() + "," + product.getStock());
 		try {
+			// 引数を利用し、更新用のSQL文を定義
+			String sql = "UPDATE productinfo SET stock =" + product.getStock() + " = Where productid='"
+					+ product.getProductid() + "'";
 
-			// 引数の情報を利用し、更新用のSQL文を文字列として定義
-			String sql = "UPDATE orderinfo SET payment='" + orderinfo.getPayment() + "',delivery='"
-					+ orderinfo.getDelivery() + "' WHERE orderid='" + orderinfo.getOrderid() + "'";
-
-			// BookDAOクラスに定義したgetConnection()メソッドを利用して、Connectionオブジェクトを生成
+			// Connection,Statementオブジェクトを生成
 			con = getConnection();
-
-			// ConnectionオブジェクトのcreateStatement（）メソッドを利用して、Statementオブジェクトを生成
 			smt = con.createStatement();
-
-			// StatementオブジェクトのexecuteUpdate（）メソッドを利用して、SQL文を発行し書籍データを変更
+			// executeUpdate()メソッドを利用してSQL文を発行し書籍データを更新
 			smt.executeUpdate(sql);
+			// Statement,Connectionをクローズ
+			smt.close();
+			con.close();
 
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -99,5 +107,4 @@ public class AdminDAO {
 			}
 		}
 	}
-
 }

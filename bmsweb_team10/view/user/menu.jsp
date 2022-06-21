@@ -1,5 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
+<%@page import="java.util.ArrayList,bean.User"%>
+<%
+	//getAttributeメソッドからセッションコープに登録したuserInfoを取得
+	User userInfo =(User)session.getAttribute("userInfo");
+	//String error = (String) request.getAttribute("error");
+%>
 <html>
 <head>
 <title>会員トップ</title>
@@ -26,19 +31,19 @@
 				<tbody>
 					<tr>
 						<th>会員ID</th>
-						<td>＊＊＊＊</td>
+						<td><%=userInfo.getUserid() %></td>
 					</tr>
 					<tr>
 						<th>氏名</th>
-						<td>＊＊＊＊</td>
+						<td><%=userInfo.getName() %></td>
 					</tr>
 					<tr>
 						<th>mail</th>
-						<td>＊＊＊＊</td>
+						<td><%=userInfo.getMail() %></td>
 					</tr>
 					<tr>
 						<th>住所</th>
-						<td>＊＊＊＊</td>
+						<td><%=userInfo.getAddress() %></td>
 					</tr>
 				</tbody>
 			</table>

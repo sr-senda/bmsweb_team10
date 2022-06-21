@@ -1,46 +1,51 @@
 <web-app>
 
-	<!-- ここからuser -->
+	<!-- 共通 -->
+	<!-- LogoutServlet -->
+	<servlet>
+		<servlet-name>logoutMapping</servlet-name>
+		<servlet-class>servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logoutMapping</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
 
+	<!-- ここからuser -->
+	<!-- UserLoginServlet -->
 	<servlet>
 		<servlet-name>userloginMapping</servlet-name>
-		<servlet-class>user.UserLoginServlet</servlet-class>
+		<servlet-class>servlet.UserLoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>userloginMapping</servlet-name>
 		<url-pattern>/userlogin</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>userlogoutMapping</servlet-name>
-		<servlet-class>user.UserLogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>userlogoutMapping</servlet-name>
-		<url-pattern>/userlogout</url-pattern>
-	</servlet-mapping>
-
+	<!-- UserRegisterServlet -->
 	<servlet>
 		<servlet-name>registerMapping</servlet-name>
-		<servlet-class>user.UserRegisterServlet</servlet-class>
+		<servlet-class>servlet.UserRegisterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>registerMapping</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
 
+	<!-- UserUpdateServlet -->
 	<servlet>
 		<servlet-name>userupdateMapping</servlet-name>
-		<servlet-class>user.UserUpdateServlet</servlet-class>
+		<servlet-class>servlet.UserUpdateServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>userupdateMapping</servlet-name>
 		<url-pattern>/userupdate</url-pattern>
 	</servlet-mapping>
 
+	<!-- OrderServlet -->
 	<servlet>
 		<servlet-name>orderMapping</servlet-name>
-		<servlet-class>user.OrderServlet</servlet-class>
+		<servlet-class>servlet.OrderServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>orderMapping</servlet-name>
@@ -48,64 +53,60 @@
 	</servlet-mapping>
 
 	<!-- ここからadmin -->
-
+	<!-- AdminLoginServlet -->
 	<servlet>
 		<servlet-name>adminloginMapping</servlet-name>
-		<servlet-class>admin.AdminLoginServlet</servlet-class>
+		<servlet-class>servlet.AdminLoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>adminloginMapping</servlet-name>
 		<url-pattern>/adminlogin</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>adminlogoutMapping</servlet-name>
-		<servlet-class>admin.AdminLogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>adminlogoutMapping</servlet-name>
-		<url-pattern>/adminlogout</url-pattern>
-	</servlet-mapping>
-
+	<!-- ProductListServlet -->
 	<servlet>
 		<servlet-name>productlistMapping</servlet-name>
-		<servlet-class>admin.ProductListServlet</servlet-class>
+		<servlet-class>servlet.ProductListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>productlistMapping</servlet-name>
 		<url-pattern>/productlist</url-pattern>
 	</servlet-mapping>
 
+	<!-- StockUpdateServlet -->
 	<servlet>
 		<servlet-name>stockupdateMapping</servlet-name>
-		<servlet-class>admin.StockUpdateServlet</servlet-class>
+		<servlet-class>servlet.StockUpdateServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>stockupdateMapping</servlet-name>
 		<url-pattern>/stockupdate</url-pattern>
 	</servlet-mapping>
 
+	<!-- OrderListServlet -->
 	<servlet>
 		<servlet-name>orderlistMapping</servlet-name>
-		<servlet-class>admin.OrderListServlet</servlet-class>
+		<servlet-class>servlet.OrderListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>orderlistMapping</servlet-name>
 		<url-pattern>/orderlist</url-pattern>
 	</servlet-mapping>
 
+	<!-- DetailServlet -->
 	<servlet>
 		<servlet-name>detailMapping</servlet-name>
-		<servlet-class>admin.DetailServlet</servlet-class>
+		<servlet-class>servlet.DetailServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>detailMapping</servlet-name>
 		<url-pattern>/detail</url-pattern>
 	</servlet-mapping>
 
+	<!-- StockUpdateServlet -->
 	<servlet>
 		<servlet-name>stockupdateMapping</servlet-name>
-		<servlet-class>admin.StockUpdateServlet</servlet-class>
+		<servlet-class>servlet.StockUpdateServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>stockupdateMapping</servlet-name>
