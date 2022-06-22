@@ -103,13 +103,13 @@
 		<url-pattern>/detail</url-pattern>
 	</servlet-mapping>
 
-	<!-- StockUpdateServlet -->
+	<!-- StatusUpdateServlet -->
 	<servlet>
-		<servlet-name>stockupdateMapping</servlet-name>
-		<servlet-class>servlet.StockUpdateServlet</servlet-class>
+		<servlet-name> statuspdateMapping</servlet-name>
+		<servlet-class>servlet.StatusUpdateServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>stockupdateMapping</servlet-name>
+		<servlet-name>statuspdateMapping</servlet-name>
 		<url-pattern>/statusupdate</url-pattern>
 	</servlet-mapping>
 
