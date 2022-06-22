@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Date;
+
 //注文情報を一つのオブジェクトとしてまとめるためのDTOクラス
 public class Order {
 
@@ -9,7 +11,7 @@ public class Order {
 	private String productid;	// 注文商品ID
 	private int quantity;	// 注文個数
 	private int sumprice;	// 注文合計
-	private String orderday;		// 注文日
+	private Date orderday;		// 注文日
 	private String address;		// 住所
 	private String mail;	// メールアドレス
 	private String payment;		// 入金状況
@@ -77,11 +79,11 @@ public class Order {
 		this.sumprice = sumprice;
 	}
 
-	public String getOrderday() {
+	public Date getOrderday() {
 		return orderday;
 	}
 
-	public void setOrderday(String orderday) {
+	public void setOrderday(Date orderday) {
 		this.orderday = orderday;
 	}
 

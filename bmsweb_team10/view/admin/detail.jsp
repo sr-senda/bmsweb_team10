@@ -1,4 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="bean.Order"%>
+
+<%
+Order admin = (Order) request.getAttribute("admin");
+%>
 
 <html>
 <head>
@@ -51,16 +56,16 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>1</td>
-						<td>田中</td>
-						<td>ユニフォームA<br>ユニフォームB
+						<td><%=admin.getOrderid()%></td>
+						<td><%=admin.getName()%></td>
+						<td><%=admin.getProductid()%><br><%=admin.getProductid()%>
 						</td>
-						<td>3<br>2
+						<td><%=admin.getQuantity()%><br><%=admin.getQuantity()%>
 						</td>
-						<td>\2,100</td>
-						<td>22/06/01</td>
-						<td>入金待ち</td>
-						<td>未</td>
+						<td><%=admin.getSumprice()%></td>
+						<td><%=admin.getOrderday()%></td>
+						<td><%=admin.getPayment()%></td>
+						<td><%=admin.getDelivery()%></td>
 						<td><a
 							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
 					</tr>

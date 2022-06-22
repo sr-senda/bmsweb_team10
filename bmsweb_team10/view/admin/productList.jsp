@@ -1,3 +1,8 @@
+<!--
+作成日：2022/06/22
+作成者：田中梨貴
+内容：商品一覧（JSP）
+ -->
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList,bean.Product" %>
 
@@ -33,6 +38,7 @@
 		<div id="main" class="container">
 
 			<!-- 書籍情報リスト -->
+			<form action = "<%=request.getContextPath()%>/stockupdate">
 			<table class="list-table">
 				<thead>
 					<tr>
@@ -44,24 +50,37 @@
 					</tr>
 				</thead>
 				<tbody>
+
 			<%
 			ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("product_list");
 			if(list != null){
 				for(int i=0;i<list.size();i++){
 					Product product = (Product)list.get(i);
 			%>
+
 					<tr>
 						<td><%=product.getProductid()%></td>
 						<td><%=product.getProductname()%></td>
 						<td><%=product.getPrice()%></td>
 						<td><%=product.getStock()%></td>
-						<td><a
-							href="<%=request.getContextPath()%>/stockupdate">更新</a></td>
+
+						<td>
+							<input type="hidden" name="productid" value="<%=product.getProductid()%>"></input>
+							<input type="hidden" name="productname" value="<%=product.getProductname()%>"></input>
+							<input type="hidden" name="price" value="<%=product.getPrice()%>"></input>
+							<input type="hidden" name="stock" value="<%=product.getStock()%>"></input>
+							<input type="hidden" name="cmd" value="detail">
+							<input type="submit" value="更新"></a>
+						</td>
 					</tr>
+
+
+
 				</tbody>
 				<% }
 			}%>
 			</table>
+			</form>
 		</div>
 
 	</div>

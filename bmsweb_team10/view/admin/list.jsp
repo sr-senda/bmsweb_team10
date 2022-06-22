@@ -57,7 +57,7 @@
 						<td><a
 							href="<%=request.getContextPath()%>/detail">詳細</a></td>
 						<td><a
-							href="<%=request.getContextPath()%>/statusupdate">更新</a></td>
+							href="<%=request.getContextPath()%>/statusupdate?cmd=update">更新</a></td>
 				<%
 				}
 			}

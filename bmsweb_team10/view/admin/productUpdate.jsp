@@ -1,9 +1,14 @@
 <!--
-作成日：2022/06/21
+作成日：2022/06/22
 作成者：田中梨貴
 内容：在庫数更新（jsp）
  -->
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="bean.Product" %>
+
+<%
+Product product = (Product)request.getAttribute("product");
+%>
 
 <html>
 <head>
@@ -46,27 +51,28 @@
 					<tbody>
 						<tr>
 							<th>商品No</th>
-							<td>1</td>
-							<td>1</td>
+							<td><%=product.getProductid() %></td>
+							<td><%=product.getProductid() %></td>
 						</tr>
 						<tr>
 							<th>商品名</th>
-							<td>ユニフォームA</td>
-							<td>ユニフォームA</td>
+							<td><%=product.getProductname() %></td>
+							<td><%=product.getProductid() %></td>
 						</tr>
 						<tr>
 							<th>価格</th>
-							<td>\300</td>
-							<td>\300</td>
+							<td><%= product.getPrice() %></td>
+							<td><%= product.getPrice() %></td>
 						</tr>
 						<tr>
 							<th>在庫数</th>
-							<td>5</td>
+							<td><%=product.getStock() %></td>
 							<td><input type="text" name="stock"></td>
 						</tr>
 					</tbody>
 				</table>
-
+				<input type="hidden" name="productid" value="<%=product.getProductid()%>">
+				<input type="hidden" name="cmd" value="update">
 				<input type="submit" value="更新">
 			</form>
 		</div>

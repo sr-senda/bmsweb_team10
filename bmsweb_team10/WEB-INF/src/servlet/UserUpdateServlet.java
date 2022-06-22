@@ -20,7 +20,6 @@ public class UserUpdateServlet extends HttpServlet {
 		String name = "";
 		String mail = "";
 		String address = "";
-		String password = "";
 		String error = "";
 		String cmd = "";
 
@@ -89,6 +88,12 @@ public class UserUpdateServlet extends HttpServlet {
 
 			// UserDAOクラスに定義したupdate（）メソッドを利用して、会員情報を更新
 			userDao.update(userInfo);
+
+			//selectByUserIdメソッドで呼び出し
+			userInfo  = userDao.selectByUserId(userInfo.getUserid());
+
+			//更新後の会員情報をセッションスコープに登録
+			session.setAttribute("userInfo", userInfo);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、会員情報変更は行えませんでした。";

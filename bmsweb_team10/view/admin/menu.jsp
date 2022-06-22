@@ -1,3 +1,8 @@
+<!--
+作成日：2022/06/22
+作成者：田中梨貴
+内容：管理者メニュー
+ -->
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <html>
@@ -23,9 +28,9 @@
 		<!-- コンテンツ(本文) -->
 		<div id="main" class="container">
 			<ul class="link">
-				<li><a href="<%=request.getContextPath()%>/view/admin/list.jsp">【注文内容一覧】</a></li>
-				<li><a href="<%=request.getContextPath()%>/view/admin/productList.jsp">【商品一覧】</a></li>
-				<li><a href="<%=request.getContextPath()%>/logout" class="mb50">【ログアウト】</a></li>
+				<li><a href="<%=request.getContextPath()%>/orderlist">【注文内容一覧】</a></li>
+				<li><a href="<%=request.getContextPath()%>/productlist">【商品一覧】</a></li>
+				<li><a href="<%=request.getContextPath()%>/logout?cmd=adminlogin" class="mb50">【ログアウト】</a></li>
 			</ul>
 		</div>
 

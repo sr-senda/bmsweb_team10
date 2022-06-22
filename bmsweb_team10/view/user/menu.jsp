@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList,bean.User"%>
 <%
 	//getAttributeメソッドからセッションコープに登録したuserInfoを取得
-	User userInfo =(User)session.getAttribute("userInfo");
+	User userInfo =(User)request.getAttribute("userInfo");
 	//String error = (String) request.getAttribute("error");
 %>
 <html>
@@ -51,7 +51,7 @@
 				<li><a href="<%=request.getContextPath()%>/view/user/userUpdate.jsp">【会員情報変更】</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/view/user/order.jsp">【注文する】</a></li>
-				<li><a href="<%=request.getContextPath()%>/logout" class="mb50">【ログアウト】</a></li>
+				<li><a href="<%=request.getContextPath()%>/logout?cmd=userlogin" class="mb50">【ログアウト】</a></li>
 			</ul>
 		</div>
 

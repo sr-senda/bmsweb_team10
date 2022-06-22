@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<th>住所</th>
-						<td><input type="text" name="adress"></td>
+						<td><input type="text" name="address"></td>
 					</tr>
 					<tr>
 						<th>パスワード</th>
