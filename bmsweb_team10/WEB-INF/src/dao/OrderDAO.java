@@ -2,6 +2,7 @@
 package dao;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import bean.Order;
@@ -83,11 +84,13 @@ public class OrderDAO {
 			// DB接続
 			con = getConnection();
 			smt = con.createStatement();
+			String str = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getOrderday());
 
 			// SQL文
-			String sql = "INSERT INTO orderinfo (userid, name, productid, quantity, address, mail) VALUES('"
-					+ order.getUserid() + "', '" + order.getName() + "', '" + order.getProductid() + " ', "
-					+ order.getQuantity() + ", '" + order.getAddress() + "', '" + order.getMail() + "')";
+			String sql = "INSERT INTO orderinfo VALUES(0,'" + order.getUserid() + "', '" + order.getName() + "', '"
+					+ order.getProductid() + " ', " + order.getQuantity() + "," + order.getSumprice() + ",'"
+					+ str + "','" + order.getAddress() + "', '" + order.getMail() + "','"
+					+ order.getPayment() + "','" + order.getDelivery() + "')";
 
 			// SQL発行
 			smt.executeUpdate(sql);
@@ -174,6 +177,8 @@ public class OrderDAO {
 				order.setOrderday(rs.getDate("orderday"));
 				order.setPayment(rs.getString("payment"));
 				order.setDelivery(rs.getString("delivery"));
+				// メールアドレス送信用にメールアドレス情報を受け取る
+				order.setMail(rs.getString("mail"));
 
 			}
 

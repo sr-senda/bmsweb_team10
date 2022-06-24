@@ -99,9 +99,7 @@ public class UserRegisterServlet extends HttpServlet {
 			// insert（）メソッドを利用して、Userオブジェクトに格納された書籍データをデータベースに登録
 			userDao.insert(userInfo);
 
-			//Userオブジェクトをセッションスコープに"userInfo"という名前で登録
-			HttpSession session = request.getSession();
-			session.setAttribute("userInfo", userInfo);
+			request.setAttribute("userInfo", userInfo);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、会員登録はできませんでした。";

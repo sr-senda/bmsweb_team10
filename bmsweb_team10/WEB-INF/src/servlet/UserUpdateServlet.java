@@ -14,9 +14,8 @@ import dao.UserDAO;
 
 public class UserUpdateServlet extends HttpServlet {
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userid = "";
 		String name = "";
 		String mail = "";
 		String address = "";
@@ -28,56 +27,55 @@ public class UserUpdateServlet extends HttpServlet {
 			// 画面からの入力情報を受け取るためのエンコードを設定
 			request.setCharacterEncoding("UTF-8");
 
-			// 更新後の会員情報を格納するBookオブジェクトを生成
-			User userInfo = new User();
+			String userid = request.getParameter("userId");
+			cmd = request.getParameter("cmd");
 
 			// DAOオブジェクト宣言
 			UserDAO userDao = new UserDAO();
+			// 更新後の会員情報を格納するBookオブジェクトを生成
+			User userInfo = userDao.selectByUserId(userid);
 
-			//getAttributeメソッドからセッションコープに登録したuserInfoを取得
-			HttpSession session = request.getSession();
-			User oldUserInfo =(User)session.getAttribute("userInfo");
-
-			//会員IDを取得
-			userid = oldUserInfo.getUserid();
+			if (cmd.equals("detail")) {
+				// 更新後の会員情報をセッションスコープに登録
+				request.setAttribute("userInfo", userInfo);
+				return;
+			}
 
 			// 画面からの入力情報を受け取る
 			name = request.getParameter("name");
 			mail = request.getParameter("email");
 			address = request.getParameter("address");
 
-
-
 			// エラー処理--------------------------------------------------------------------------------
 			// 未入力判定
 			// 氏名
-			//if ("".equals(name)) {
-			//	error = "nameが未入力の為、会員情報変更は行えませんでした。";
-			//	cmd = "list";
-			//	return;
-			//}
+			// if ("".equals(name)) {
+			// error = "nameが未入力の為、会員情報変更は行えませんでした。";
+			// cmd = "list";
+			// return;
+			// }
 			// メール
-			//if ("".equals(mail)) {
-			//	error = "mailが未入力の為、会員情報変更は行えませんでした。";
-			//	cmd = "list";
-			//	return;
-			//}
-			//住所
-			//if ("".equals(address)) {
-			//	error = "addressが未入力の為、会員情報変更は行えませんでした。";
-			//	cmd = "list";
-			//	return;
-			//}
+			// if ("".equals(mail)) {
+			// error = "mailが未入力の為、会員情報変更は行えませんでした。";
+			// cmd = "list";
+			// return;
+			// }
+			// 住所
+			// if ("".equals(address)) {
+			// error = "addressが未入力の為、会員情報変更は行えませんでした。";
+			// cmd = "list";
+			// return;
+			// }
 
 			// 更新対象の会員情報が存在しているかselectByUserIdメソッドでチェック
-			//User check = new User();
-			//check = userDao.selectByUserId(userid);
+			// User check = new User();
+			// check = userDao.selectByUserId(userid);
 
-			//if (check.getUserid() == null) {
-			//	error = "更新対象の会員情報が存在しない為、会員情報変更は行えませんでした。";
-			//	cmd = "list";
-			//	return;
-			//}
+			// if (check.getUserid() == null) {
+			// error = "更新対象の会員情報が存在しない為、会員情報変更は行えませんでした。";
+			// cmd = "list";
+			// return;
+			// }
 			// ---------------------------------------------------------------------------------
 
 			// 各setterメソッドを利用し、userid, name, mail,address,passwordを設定
@@ -89,11 +87,11 @@ public class UserUpdateServlet extends HttpServlet {
 			// UserDAOクラスに定義したupdate（）メソッドを利用して、会員情報を更新
 			userDao.update(userInfo);
 
-			//selectByUserIdメソッドで呼び出し
-			userInfo  = userDao.selectByUserId(userInfo.getUserid());
+			// selectByUserIdメソッドで呼び出し
+			userInfo = userDao.selectByUserId(userInfo.getUserid());
 
-			//更新後の会員情報をセッションスコープに登録
-			session.setAttribute("userInfo", userInfo);
+			// 更新後の会員情報をセッションスコープに登録
+			request.setAttribute("userInfo", userInfo);
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、会員情報変更は行えませんでした。";
@@ -102,14 +100,17 @@ public class UserUpdateServlet extends HttpServlet {
 		} catch (Exception e) {
 			error = "予期せぬエラーが発生しました。<br>" + e;
 		} finally {
-			//request.setAttribute("error", error);
-			if ("".equals(error)) {
-				request.getRequestDispatcher("/view/user/menu.jsp").forward(request, response);
-			} else {
-				// errorとcmdをリクエストスコープに登録し、error.jspにフォワード
-				request.setAttribute("error", error);
-				request.setAttribute("cmd", cmd);
-				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			if (cmd.equals("detail")) {
+				request.getRequestDispatcher("/view/user/userUpdate.jsp").forward(request, response);
+			} else if (cmd.equals("update")) {
+				if ("".equals(error)) {
+					request.getRequestDispatcher("/view/user/menu.jsp").forward(request, response);
+				} else {
+					// errorとcmdをリクエストスコープに登録し、error.jspにフォワード
+					request.setAttribute("error", error);
+					request.setAttribute("cmd", cmd);
+					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				}
 			}
 		}
 	}

@@ -18,10 +18,10 @@ public class DetailServlet extends HttpServlet {
 		try {
 
 			// オブジェクト生成
-			OrderDAO admDao = new OrderDAO();
+			OrderDAO orderDao = new OrderDAO();
 
 			// 注文情報を格納するAdminオブジェクトを生成
-			Order admin = new Order();
+			Order order = new Order();
 
 			// 文字エンコーデキングの設定
 			request.setCharacterEncoding("UTF-8");
@@ -30,10 +30,10 @@ public class DetailServlet extends HttpServlet {
 			String orderid = request.getParameter("orderid");
 
 			// 注文情報を取得
-			admin = admDao.selectByOrderid(orderid);
+			order = orderDao.selectByOrderid(orderid);
 
 			// 取得した〇〇情報を[admin]でリクエストスコープに登録
-			request.setAttribute("admin", admin);
+			request.setAttribute("order", order);
 
 		} catch (IllegalStateException e) {
 

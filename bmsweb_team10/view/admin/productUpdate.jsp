@@ -57,7 +57,7 @@ Product product = (Product)request.getAttribute("product");
 						<tr>
 							<th>商品名</th>
 							<td><%=product.getProductname() %></td>
-							<td><%=product.getProductid() %></td>
+							<td><%=product.getProductname() %></td>
 						</tr>
 						<tr>
 							<th>価格</th>

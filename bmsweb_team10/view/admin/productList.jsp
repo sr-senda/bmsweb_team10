@@ -38,7 +38,6 @@
 		<div id="main" class="container">
 
 			<!-- 書籍情報リスト -->
-			<form action = "<%=request.getContextPath()%>/stockupdate">
 			<table class="list-table">
 				<thead>
 					<tr>
@@ -63,15 +62,8 @@
 						<td><%=product.getProductname()%></td>
 						<td><%=product.getPrice()%></td>
 						<td><%=product.getStock()%></td>
+						<td><a href="<%=request.getContextPath() %>/stockupdate?productid=<%=product.getProductid()%>&cmd=detail">更新</a></td>
 
-						<td>
-							<input type="hidden" name="productid" value="<%=product.getProductid()%>"></input>
-							<input type="hidden" name="productname" value="<%=product.getProductname()%>"></input>
-							<input type="hidden" name="price" value="<%=product.getPrice()%>"></input>
-							<input type="hidden" name="stock" value="<%=product.getStock()%>"></input>
-							<input type="hidden" name="cmd" value="detail">
-							<input type="submit" value="更新"></a>
-						</td>
 					</tr>
 
 
@@ -80,7 +72,6 @@
 				<% }
 			}%>
 			</table>
-			</form>
 		</div>
 
 	</div>

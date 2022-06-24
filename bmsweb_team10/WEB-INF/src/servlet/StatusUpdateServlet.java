@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.Order;
 import dao.OrderDAO;
+import util.SendMail;
 
 public class StatusUpdateServlet extends HttpServlet {
 
@@ -36,24 +37,36 @@ public class StatusUpdateServlet extends HttpServlet {
 			// 画面からの入力情報を受け取るためのエンコードを設定➾文字化けしないため
 			request.setCharacterEncoding("UTF-8");
 
-			//画面から送信されるcmdの値を取得➾update.jspの60行台
-			cmd = request.getParameter("cmd");//cmdにlistが入っている
+			// 画面から送信されるcmdの値を取得➾update.jspの60行台
+			cmd = request.getParameter("cmd");// cmdにlistが入っている
 
-			/*
-			 * 画面（update.jsp）のラジオボタン入力による情報を受け取り name属性で設定した2つの値（payment,delivery）と一致させる
-			 * ➾orderに格納
-			 */
-			//
-			if(cmd.equals("list")) {
+			if (cmd.equals("list")) {
+				order.setOrderid(request.getParameter("orderid"));
 				order.setPayment(request.getParameter("payment"));
 				order.setDelivery(request.getParameter("delivery"));
 				objDao.update(order);
-			}else if (cmd.equals("update")) {
-				order = objDao.selectByOrderid(order.getOrderid());
-				request.setAttribute("order",order);
+			} else if (cmd.equals("update")) {
+				String orderid = request.getParameter("orderid");
+				order = objDao.selectByOrderid(orderid);
+				request.setAttribute("order", order);
+
+				String payment = request.getParameter("payment");
+				String delivery = request.getParameter("delivery");
+
+				// 入金済み且つ未発送ならメールを送る
+				if(payment.equals("2") && delivery.equals("1")) {
+					SendMail sendMail = new SendMail();
+					sendMail.PaymentMail(order);
+				}
+
+				// 入金済み且つ発送済みならメールを送る
+				if(payment.equals("2") && delivery.equals("3")) {
+					order.getName();
+					SendMail sendMail = new SendMail();
+					sendMail.DeliveryMail(order);
+				}
 
 			}
-
 
 		} catch (IllegalStateException e) {
 
@@ -65,7 +78,7 @@ public class StatusUpdateServlet extends HttpServlet {
 
 			if (cmd.equals("update")) {
 				request.getRequestDispatcher("/view/admin/update.jsp").forward(request, response);
-			}//エラー処理はここからelseで遷移させる？
+			} // エラー処理はここからelseで遷移させる？
 
 		}
 

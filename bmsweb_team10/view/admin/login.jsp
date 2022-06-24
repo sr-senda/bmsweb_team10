@@ -14,7 +14,7 @@
 		<!-- ログインのコンテンツ部分 -->
 		<div id="main" class="container">
 
-			<form action="<%=request.getContextPath()%>/view/admin/menu.jsp" method="POST">
+			<form action="<%=request.getContextPath()%>/adminlogin" method="POST">
 				<table class="input-table">
 					<tr>
 						<th>ID</th>

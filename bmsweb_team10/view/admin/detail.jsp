@@ -2,7 +2,7 @@
 <%@page import="bean.Order"%>
 
 <%
-Order admin = (Order) request.getAttribute("admin");
+Order order = (Order) request.getAttribute("order");
 %>
 
 <html>
@@ -25,7 +25,7 @@ Order admin = (Order) request.getAttribute("admin");
 						<li><a
 							href="<%=request.getContextPath()%>/view/admin/menu.jsp">[メニュー]</a></li>
 						<li><a
-							href="<%=request.getContextPath()%>/view/admin/list.jsp">[注文内容一覧]</a></li>
+							href="<%=request.getContextPath()%>/orderlist">[注文内容一覧]</a></li>
 					</ul>
 				</div>
 
@@ -56,18 +56,18 @@ Order admin = (Order) request.getAttribute("admin");
 				</thead>
 				<tbody>
 					<tr>
-						<td><%=admin.getOrderid()%></td>
-						<td><%=admin.getName()%></td>
-						<td><%=admin.getProductid()%><br><%=admin.getProductid()%>
+						<td><%=order.getOrderid()%></td>
+						<td><%=order.getName()%></td>
+						<td><%=order.getProductid()%><br><%=order.getProductid()%>
 						</td>
-						<td><%=admin.getQuantity()%><br><%=admin.getQuantity()%>
+						<td><%=order.getQuantity()%><br><%=order.getQuantity()%>
 						</td>
-						<td><%=admin.getSumprice()%></td>
-						<td><%=admin.getOrderday()%></td>
-						<td><%=admin.getPayment()%></td>
-						<td><%=admin.getDelivery()%></td>
+						<td><%=order.getSumprice()%></td>
+						<td><%=order.getOrderday()%></td>
+						<td><%=order.getPayment()%></td>
+						<td><%=order.getDelivery()%></td>
 						<td><a
-							href="<%=request.getContextPath()%>/view/admin/update.jsp">更新</a></td>
+							href="<%=request.getContextPath()%>/statusupdate?cmd=update&orderid=<%=order.getOrderid()%>">更新</a></td>
 					</tr>
 				</tbody>
 			</table>

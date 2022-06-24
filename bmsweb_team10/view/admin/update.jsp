@@ -20,7 +20,7 @@ Order order = (Order)request.getAttribute("order");
 				<!-- ナビゲーション  -->
 				<div id="nav">
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/view/admin/list.jsp">[注文内容一覧]</a></li>
+						<li><a href="<%=request.getContextPath()%>/statusupdate?cmd=list">[注文内容一覧]</a></li>
 					</ul>
 				</div>
 
@@ -31,9 +31,27 @@ Order order = (Order)request.getAttribute("order");
 			</div>
 		</div>
 
+<%
+String payment=null;
+String deliver=null;
+if(order.getPayment().equals("1")){
+	payment = "入金待ち";
+}else if(order.getPayment().equals("2")){
+	payment = "入金済み";
+}
+
+if(order.getDelivery().equals("1")){
+	deliver = "未発送";
+}else if(order.getDelivery().equals("2")){
+	deliver = "発送準備中";
+}else if(order.getDelivery().equals("3")){
+	deliver = "発送済み";
+}
+%>
 		<!-- 書籍一覧のコンテンツ部分 -->
 		<div id="main" class="container">
 
+<table><td>「<%=order.getName() %>様」の現在の入金配送状況　「<%=payment %>」、「<%=deliver %>」</table>
 			<!-- 書籍情報リスト -->
 			<form action="<%=request.getContextPath()%>/statusupdate">
 			<table class="list-table">
@@ -46,7 +64,7 @@ Order order = (Order)request.getAttribute("order");
 				</thead>
 				<tbody>
 					<tr>
-						<td>1</td>
+						<td><%=order.getOrderid() %></td>
 						<td>
 							<label><input type="radio" name="payment" value="1">入金待ち</label>
 							<label><input type="radio" name="payment" value="2">入金済み</label>
@@ -59,6 +77,7 @@ Order order = (Order)request.getAttribute("order");
 					</tr>
 				</tbody>
 			</table>
+			<input type="hidden" name="orderid" value="<%= order.getOrderid()%>">
 			<input type="hidden" name="cmd" value="list">
 			<input type="submit" value="更新" >
 			</form>

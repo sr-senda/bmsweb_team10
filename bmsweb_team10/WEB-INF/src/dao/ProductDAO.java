@@ -122,7 +122,7 @@ public class ProductDAO {
 			try {
 
 				// 引数を利用し、検索用のSQL文を文字列として定義
-				String sql = "SELECT productid,productname,price,stock FROM productinfo WHERE productid = '" + productid + "'";
+				String sql = "SELECT * FROM productinfo WHERE productid = '" + productid + "'";
 
 				// Connection,Statementオブジェクトを生成
 				con = getConnection();
@@ -160,5 +160,41 @@ public class ProductDAO {
 				}
 			}
 			return product;
+		}
+
+		// データベースの在庫数を更新するインスタンスメソッドupdateを定義
+		public void updateStock(String productid, int stock ) {
+			Connection con = null;
+			Statement smt = null;
+
+			try {
+				// 引数を利用し、更新用のSQL文を定義
+				String sql = "UPDATE productinfo SET stock =" + stock + " where productid='"+ productid + "'";
+
+				// Connection,Statementオブジェクトを生成
+				con = getConnection();
+				smt = con.createStatement();
+				// executeUpdate()メソッドを利用してSQL文を発行し書籍データを更新
+				smt.executeUpdate(sql);
+				// Statement,Connectionをクローズ
+				smt.close();
+				con.close();
+
+			} catch (Exception e) {
+				throw new IllegalStateException(e);
+			} finally {
+				if (smt != null) {
+					try {
+						smt.close();
+					} catch (SQLException ignore) {
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException ignore) {
+					}
+				}
+			}
 		}
 }

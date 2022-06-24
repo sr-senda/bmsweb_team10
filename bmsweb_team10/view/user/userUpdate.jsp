@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList,bean.User"%>
 <%
 	//getAttributeメソッドからセッションスコープに登録したuserInfoを取得
-	User userInfo =(User)session.getAttribute("userInfo");
+	User userInfo =(User)request.getAttribute("userInfo");
 	//String error = (String) request.getAttribute("error");
 %>
 <html>
@@ -28,7 +28,7 @@
 		<div id="main" class="container">
 
 			<!--  入力フォーム -->
-			<form action="<%=request.getContextPath()%>/userupdate" method="post">
+			<form action="<%=request.getContextPath()%>/userupdate">
 				<!-- 変更画面 -->
 				<table class="input-table">
 					<thead>
@@ -62,6 +62,8 @@
 					</tbody>
 				</table>
 
+				<input type="hidden" name="userId" value="<%=userInfo.getUserid() %>">
+				<input type="hidden" name="cmd" value="update">
 				<input type="submit" value="変更完了">
 			</form>
 		</div>

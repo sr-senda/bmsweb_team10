@@ -48,9 +48,9 @@
 				</tbody>
 			</table>
 			<ul class="link">
-				<li><a href="<%=request.getContextPath()%>/view/user/userUpdate.jsp">【会員情報変更】</a></li>
+				<li><a href="<%=request.getContextPath()%>/userupdate?cmd=detail&userId=<%=userInfo.getUserid() %>">【会員情報変更】</a></li>
 				<li><a
-					href="<%=request.getContextPath()%>/view/user/order.jsp">【注文する】</a></li>
+					href="<%=request.getContextPath()%>/view/user/order.jsp?userid=<%=userInfo.getUserid()%>">【注文する】</a></li>
 				<li><a href="<%=request.getContextPath()%>/logout?cmd=userlogin" class="mb50">【ログアウト】</a></li>
 			</ul>
 		</div>

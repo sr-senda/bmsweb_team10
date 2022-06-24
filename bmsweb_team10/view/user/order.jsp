@@ -1,5 +1,14 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="bean.User,dao.UserDAO"%>
+<%
+	// getAttributeメソッドからセッションコープに登録したuserInfoを取得
+	User userInfo = (User) request.getAttribute("userInfo");
+	String userid = request.getParameter("userid");
 
+	UserDAO userDao = new UserDAO();
+	User user = userDao.selectByUserId(userid);
+	//String error = (String) request.getAttribute("error");
+%>
 <html>
 <head>
 <title>ユニフォーム注文</title>
@@ -25,12 +34,57 @@
 
 			<!--  入力フォーム -->
 			<form action="<%=request.getContextPath()%>/order">
+				<%
+					if (user.getUserid() != null) {
+				%>
 				<!-- 変更画面 -->
 				<table class="input-table">
 					<tbody>
 						<tr>
 							<th>会員ID：</th>
-							<td><input type="text" name="userid"></td>
+							<td><input type="text" name="userid"
+								value="<%=user.getUserid()%>"></td>
+						</tr>
+						<tr>
+							<th>氏名：</th>
+							<td><input type="text" name="name"
+								value="<%=user.getName()%>"></td>
+						</tr>
+						<tr>
+							<th>mail：</th>
+							<td><input type="text" name="mail"
+								value="<%=user.getMail()%>"></td>
+						</tr>
+						<tr>
+							<th>住所</th>
+							<td><input type="text" name="address"
+								value="<%=user.getAddress()%>"></td>
+						</tr>
+						<tr>
+							<th>商品</th>
+							<td><select name="product">
+									<option value="001">ユニフォームA</option>
+									<option value="2">ユニフォームB</option>
+									<option value="3">ユニフォームC</option>
+									<option value="4">ユニフォームD</option>
+									<option value="5">ユニフォームE</option>
+							</select></td>
+						</tr>
+						<tr>
+							<th>個数</th>
+							<td><input type="text" name="quantity"></td>
+						</tr>
+					</tbody>
+				</table>
+				<%
+					} else {
+				%>
+				<!-- 変更画面 -->
+				<table class="input-table">
+					<tbody>
+						<tr>
+							<th>会員ID：</th>
+							<td>ゲスト</td>
 						</tr>
 						<tr>
 							<th>氏名：</th>
@@ -47,7 +101,7 @@
 						<tr>
 							<th>商品</th>
 							<td><select name="product">
-									<option value="1">ユニフォームA</option>
+									<option value="001">ユニフォームA</option>
 									<option value="2">ユニフォームB</option>
 									<option value="3">ユニフォームC</option>
 									<option value="4">ユニフォームD</option>
@@ -60,6 +114,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<%
+					}
+				%>
 				<input type="submit" value="注文">
 			</form>
 		</div>
